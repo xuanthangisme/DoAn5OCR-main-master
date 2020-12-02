@@ -1,0 +1,26 @@
+.canvasContainer {
+  width: 100%;
+  height: 25vh;
+  margin: 10px auto;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  height: 50px;
+}
+
+.table-container {
+  max-height: 200px;
+  overflow: auto;
+}
+
+table tr.mat-row {
+  height: 50px;
+}
+
+.highlight {
+  background: lavender;
+}
+
+
