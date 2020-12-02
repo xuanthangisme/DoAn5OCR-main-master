@@ -13,9 +13,15 @@ declare var $: any;
 export class VanbandiComponent extends BaseComponent implements OnInit {
   public vanbandis: any ;
   public VanBanDi: any;
+  public LoaiVanBan : any;
+  public NoiNhan : any;
+  public listvb: any [];
+  public listpb: any [];
   public totalRecords:any;
   public pageSize = 3;
   public page = 1;
+  public page_c = 1;
+  public pageSize_c=3;
   public uploadedFiles: any[] = [];
   public formsearch: any;
   public formdata: any;
@@ -29,10 +35,40 @@ export class VanbandiComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formsearch = this.fb.group({
-      'noinhan': [''],  
+    this.listvb =[{label:'Chọn loại văn bản',value : 'Khác'}];
+    this._api.get('/api/VanBanDi/get-all').takeUntil(this.unsubscribe).subscribe(res => {
+      this.LoaiVanBan = res;
+      console.log(res);
+      this.LoaiVanBan.forEach(i =>{
+        let tam = {label : 'Chọn loại văn bản', value : 'Khác'};
+        
+        tam.label=i.tenloaivanban;
+        tam.value = i.tenloaivanban;
+       
+        this.listvb.push(tam);
+      });
     });
-   
+
+    this.listpb =[{label:'Nơi nhận',value : 'Khác'}];
+    this._api.get('/api/PhongBan/get-all').takeUntil(this.unsubscribe).subscribe(res => {
+      this.NoiNhan = res;
+      console.log(res);
+      this.NoiNhan.forEach(i =>{
+        let tam1 = {label : 'Nơi nhận', value : 'Khác'};
+        
+        tam1.label=i.tenphongban;
+        tam1.value = i.tenphongban;
+       
+        this.listpb.push(tam1);
+      });
+    });
+
+    this.formsearch = this.fb.group({
+      'tenphongban': [''],
+      'loaivb':['']  
+    });
+    
+
    this.search();
   }
 
@@ -47,7 +83,7 @@ export class VanbandiComponent extends BaseComponent implements OnInit {
   search() { 
     this.page = 1;
     this.pageSize = 5;
-    this._api.post('/api/VanBanDi/search',{page: this.page, pageSize: this.pageSize, noinhan: this.formsearch.get('noinhan').value}).takeUntil(this.unsubscribe).subscribe(res => {
+    this._api.post('/api/VanBanDi/search',{page: this.page, pageSize: this.pageSize, tenphongban: this.formsearch.get('tenphongban').value}).takeUntil(this.unsubscribe).subscribe(res => {
       this.VanBanDi = res.data;
       this.totalRecords =  res.totalItems;
       this.pageSize = res.pageSize;
@@ -71,12 +107,11 @@ export class VanbandiComponent extends BaseComponent implements OnInit {
     } 
     if(this.isCreate) { 
       this.getEncodeFromImage(this.file_image).subscribe((data: any): void => {
-        
         let tmp = {
            
           ngaybanhanh:value.ngaybanhanh,
-          loaivanbanid:value.loaivanbanid,
-          noinhan:value.noinhan,
+          tenloaivanban:value.tenloaivanban,
+          tenphongban:value.tenphongban,
           noidung:value.noidung,
           user_id:value.user_id        
           };
@@ -91,12 +126,13 @@ export class VanbandiComponent extends BaseComponent implements OnInit {
         
         let tmp = {
           ngaybanhanh:value.ngaybanhanh,
-          loaivanbanid:value.loaivanbanid,
-          noinhan:value.noinhan,
+          tenloaivanban:value.tenloaivanban,
+          tenphongban:value.tenphongban,
           noidung:value.noidung,
           user_id:value.user_id,   
           vanbanid:this.vanbandis.vanbanid,          
           };
+
         this._api.post('/api/VanBanDi/update-vanbandi',tmp).takeUntil(this.unsubscribe).subscribe(res => {
           alert('Cập nhật thành công');
           this.search();
@@ -118,8 +154,8 @@ export class VanbandiComponent extends BaseComponent implements OnInit {
     //this.works = null;
     this.formdata = this.fb.group({
       'ngaybanhanh': ['', Validators.required],
-      'loaivanbanid': ['', Validators.required],
-      'noinhan': [  Validators.required],
+      'tenloaivanban': ['', Validators.required],
+      'tenphongban': [  Validators.required],
       'noidung': [ , Validators.required],
       'user_id': [,Validators.required],
     }); 
@@ -134,8 +170,8 @@ export class VanbandiComponent extends BaseComponent implements OnInit {
       $('#createUserModal').modal('toggle');
       this.formdata = this.fb.group({
         'ngaybanhanh': ['', Validators.required],
-      'loaivanbanid': ['', Validators.required],
-      'noinhan': [ '', Validators.required],
+      'tenloaivanban': ['', Validators.required],
+      'tenphongban': [ '', Validators.required],
       'noidung': [ '', Validators.required],
       'user_id': ['',Validators.required],
       } );
@@ -158,17 +194,17 @@ export class VanbandiComponent extends BaseComponent implements OnInit {
       //  let dateWorkend = new Date(this.vanbandi.dateWorkend);
           this.formdata = this.fb.group({
             'ngaybanhanh': [ngaybanhanh, Validators.required],
-            'loaivanbanid': [this.vanbandis.loaivanbanid, Validators.required],
-            'noinhan': [this.vanbandis.noinhan, Validators.required],
+            'tenloaivanban': [this.vanbandis.tenloaivanban, Validators.required],
+            'tenphongban': [this.vanbandis.tenphongban, Validators.required],
             'noidung': [this.vanbandis.noidung, Validators.required],
             'user_id': [this.vanbandis.user_id, Validators.required],
-            
+         
           }); 
           this.doneSetupForm = true;
         }); 
     }, 700);
   }
-
+  
   closeModal() {
     $('#createUserModal').closest('.modal').modal('hide');
   }

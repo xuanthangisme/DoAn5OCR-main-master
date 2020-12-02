@@ -60,7 +60,7 @@ export const mainRoutes: Routes = [
       {
         path: 'congviec',
         loadChildren: () =>
-          import('./congviec/congviec.module').then((m) => m.CongviecModule),
+          import('./congviec/Congviec.module').then((m) => m.CongviecModule),
         canActivate: [RoleGuard],
         data: { roles: [Role.Admin, Role.User] },
       },
@@ -71,6 +71,14 @@ export const mainRoutes: Routes = [
         canActivate: [RoleGuard],
         data: { roles: [Role.Admin, Role.User] },
       },
+      {
+        path: 'phongban',
+        loadChildren: () =>
+          import('./phongban/phongban.module').then((m) => m.PhongbanModule),
+        canActivate: [RoleGuard],
+        data: { roles: [Role.Admin, Role.User] },
+      },
+      
     ],
   },
 ];
@@ -80,7 +88,7 @@ export const mainRoutes: Routes = [
     FooterComponent,
     NavbarComponent,
     MainComponent
-
+  
   ],
   imports: [SharedModule, CommonModule, RouterModule.forChild(mainRoutes)],
 })

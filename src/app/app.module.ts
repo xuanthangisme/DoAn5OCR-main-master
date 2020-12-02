@@ -13,6 +13,8 @@ import { JwtInterceptor } from './lib/jwt.interceptor';
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {RouteReuseStrategy} from '@angular/router';
 
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -27,7 +29,10 @@ import {RouteReuseStrategy} from '@angular/router';
     HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    HttpClientModule,
+    FormsModule,
   ],
   providers: [
 

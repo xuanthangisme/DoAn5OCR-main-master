@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li>
       <i class="ace-icon fa fa-home home-icon"></i>
-      <a href="">Trang chủ</a>
+      <a href="#">Trang chủ</a>
     </li>
     <li class="active">Quản lý loại văn bản</li>
   </ul>
@@ -32,7 +32,7 @@
             <button (click)="search()" class="btn btn-sm btn-primary">Tìm kiếm</button>
           </div>
         </div>
-      </form>
+      </form> 
     </p-panel>
     <p-table selectionMode="single" [value]="LoaiVanBan" styleClass="p-datatable-gridlines">
       <ng-template pTemplate="header">
@@ -50,13 +50,13 @@
           <td>{{ item.mota }}</td>
           <td class="action-col" >
             <div class="btn-group">
-              <button title="" class="btn btn-xs btn-white btn-default"  (click)="openUpdateModal(item)">
+              <button title="" class="btn btn-xs btn-white btn-default"  (click)="openUpdateModal(item)">  
                 <i class="ace-icon fa fa-edit"></i>
               </button>
               <button title="" class="btn btn-xs btn-white btn-default" (click)="onDelete(item)">
                 <i class="ace-icon fa fa-trash"></i>
               </button>
-            </div>
+            </div>  
           </td>
         </tr>
       </ng-template>
@@ -78,7 +78,7 @@
         </div>
         <form *ngIf="doneSetupForm" [formGroup]="formdata"  (ngSubmit)="onSubmit(formdata.value)" class="form-horizontal utehy-form">
           <div class="modal-body no-padding">
-
+            
             <div class="form-group">
               <label class="col-sm-2 control-label no-padding-right"> Tên loại văn bản(<span style="color: red;">*</span>)</label>
               <div class="col-sm-10">
@@ -87,7 +87,7 @@
                   <div *ngIf="f.tenloaivanban.errors.required">Tên loại là bắt buộc</div>
                 </div>
               </div>
-
+              
             </div>
             <div class="form-group">
               <label class="col-sm-2 control-label no-padding-right"> Mô tả(<span style="color: red;">*</span>)</label>
@@ -97,13 +97,13 @@
                   <div *ngIf="f.mota.errors.required">Mô tả</div>
                 </div>
               </div>
-
+              
             </div>
-
-
-
-
-
+           
+           
+            
+            
+            
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default btn-sm" (click)="Reset()">
@@ -116,7 +116,8 @@
             <i class="fa fa-times"></i> Đóng lại
           </button>
         </div>
-      </form>
+      </form>  
       </div>
     </div>
   </div>
+ 

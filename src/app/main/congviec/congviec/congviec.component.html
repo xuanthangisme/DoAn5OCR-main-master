@@ -2,7 +2,7 @@
   <ul class="breadcrumb">
     <li>
       <i class="ace-icon fa fa-home home-icon"></i>
-      <a href="">Trang chủ</a>
+      <a href="#">Trang chủ</a>
     </li>
     <li class="active">Quản lý công việc</li>
   </ul>
@@ -26,14 +26,14 @@
             <input formControlName="workname"  type="text" placeholder="Công việc" />
           </div>
         </div>
-
+        
         <div class="form-group">
           <label class="col-sm-1 control-label no-padding-right"></label>
           <div class="col-sm-11">
             <button (click)="search()" class="btn btn-sm btn-primary">Tìm kiếm</button>
           </div>
         </div>
-      </form>
+      </form> 
     </p-panel>
     <p-table selectionMode="single" [value]="Work" styleClass="p-datatable-gridlines">
       <ng-template pTemplate="header">
@@ -57,13 +57,13 @@
           <td>{{ item.note }}</td>
           <td class="action-col" >
             <div class="btn-group">
-              <button title="" class="btn btn-xs btn-white btn-default"  (click)="openUpdateModal(item)">
+              <button title="" class="btn btn-xs btn-white btn-default"  (click)="openUpdateModal(item)">  
                 <i class="ace-icon fa fa-edit"></i>
               </button>
               <button title="" class="btn btn-xs btn-white btn-default" (click)="onDelete(item)">
                 <i class="ace-icon fa fa-trash"></i>
               </button>
-            </div>
+            </div>  
           </td>
         </tr>
       </ng-template>
@@ -98,7 +98,7 @@
               <label class="col-sm-2 control-label no-padding-right"> Nội dung(<span style="color: red;">*</span>)</label>
               <div class="col-sm-10">
                 <input type="text" placeholder="Nội dung" formControlName="workdetails"/>
-
+               
                 <div *ngIf="submitted && f.workdetails.errors" class="invalid-feedback">
                   <div *ngIf="f.workdetails.errors.required"> Nội dung</div>
                 </div>
@@ -124,7 +124,7 @@
               <label class="col-sm-2 control-label no-padding-right">Ghi chú(<span style="color: red;">*</span>)</label>
               <div class="col-sm-10">
                <textarea formControlName="note" rows="5" cols="100"></textarea>
-
+               
                 <div *ngIf="submitted && f.workdetails.errors" class="invalid-feedback">
                   <div *ngIf="f.workdetails.errors.required"> Ghi chú</div>
                 </div>
@@ -142,7 +142,8 @@
             <i class="fa fa-times"></i> Đóng lại
           </button>
         </div>
-      </form>
+      </form>  
       </div>
     </div>
   </div>
+ 

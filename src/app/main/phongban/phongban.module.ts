@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CongviecComponent } from './congviec/Congviec.component';
+import { PhongbanComponent } from './phongban/phongban.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 @NgModule({
-  declarations: [CongviecComponent, CongviecComponent],
+  declarations: [PhongbanComponent, PhongbanComponent],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild([
       {
-        path: 'congviec',
-        component: CongviecComponent,
+        path: 'phongban',
+        component: PhongbanComponent,
       },
   ]),  
   ]
 })
-export class CongviecModule { }
+export class PhongbanModule { }
